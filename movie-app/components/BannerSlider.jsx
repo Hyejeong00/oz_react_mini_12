@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {
-    Navigation,
     Pagination,
     Autoplay,
 } from 'swiper/modules';
@@ -8,18 +7,19 @@ import {
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
-import movieList from '../data/movieListData.json';
-
-const banners = movieList.results.slice(0, 3).map(movie => ({
-    id: movie.id,
-    title: movie.title,
-    overview: movie.overview,
-    rating: movie.vote_average,
-    image: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-}));
+import { useSelector } from 'react-redux';
 
 export default function BannerSlider() {
+    const popularMovies = useSelector(state => state.movie.popular.data);
+
+    const banners = popularMovies.slice(0, 3).map(movie => ({
+        id: movie.id,
+        title: movie.title,
+        overview: movie.overview,
+        rating: movie.vote_average,
+        image: `https://image.tmdb.org/t/p/original${movie.backdrop_path? movie.backdrop_path : movie.poster_path}`,
+    }));
+
     return (
         <Swiper
         modules={[Pagination, Autoplay]}
@@ -32,7 +32,7 @@ export default function BannerSlider() {
         }}
         speed={700}
         pagination={{ clickable: true }}
-        className="w-full max-w-[1024px] h-[500px] mx-auto relative"
+        className="w-full h-[500px] mx-auto relative"
         >
         {banners.map((banner) => (
             <SwiperSlide key={banner.id} className="relative">
@@ -54,3 +54,4 @@ export default function BannerSlider() {
         </Swiper>
     );
 }
+

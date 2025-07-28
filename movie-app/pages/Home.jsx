@@ -1,23 +1,41 @@
-import { useState } from 'react'
-import data from "../data/movieListData.json"
-import MovieCard from '../components/MovieCard'
+import { useSelector } from "react-redux"
+import MovieSlider from '../components/MovieSlider'
 import BannerSlider from '../components/BannerSlider'
+import BannerSkeleton from "../components/skeleton/BannerSkeleton"
+import MovieCardSkeleton from '../components/skeleton/MovieCardSkeleton'
+import MovieSliderSkeleton from "../components/skeleton/MovieSliderSkeleton"
 
 function Home() {
-    const [movieList, setMovieList] = useState(data.results)
+    const popular = useSelector(state => state.movie.popular);
+    const nowPlaying = useSelector(state => state.movie.nowPlaying);
+    const upComing = useSelector(state => state.movie.upComing);
+    const topRated = useSelector(state => state.movie.topRated);
 
     return (
         <div className="min-h-screen bg-darkest text-white px-4 py-6 space-y-12">
-            {/* 상단 배너 슬라이더 */}
-            <BannerSlider />
+            {popular.loading ? <BannerSkeleton /> : <BannerSlider />}
 
-            <div className="grid grid-cols-5 gap-6 p-4 max-w-[1024px] mx-auto">
-                {movieList.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-                ))}
-            </div>
+            {popular.loading
+                ? <MovieSliderSkeleton title="인기영화" />
+                : <MovieSlider title="인기 영화" movies={popular.data} type="popular" />
+            }
+
+            {nowPlaying.loading
+                ? <MovieSliderSkeleton title="상영 중" />
+                : <MovieSlider title="상영 중" movies={nowPlaying.data} type="nowPlaying" />
+            }
+
+            {topRated.loading
+                ? <MovieSliderSkeleton title="평점 높은 영화" />
+                : <MovieSlider title="평점 높은 영화" movies={topRated.data} type="topRated" />
+            }
+
+            {upComing.loading
+                ? <MovieSliderSkeleton title="상영 예정" />
+                : <MovieSlider title="상영 예정" movies={upComing.data} type="upComing" />
+            }
         </div>
     )
 }
 
-export default Home
+export default Home;

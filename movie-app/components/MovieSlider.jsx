@@ -1,30 +1,35 @@
-import * as SwiperAll from 'swiper';
-console.log('Swiper export:', SwiperAll);
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper'; // ✅ v10은 여기서!
-
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
+import { Autoplay } from 'swiper/modules';
 import MovieCard from './MovieCard';
-import data from '../data/movieListData.json';
 
-export default function MovieSlider() {
+export default function MovieSlider({ title, movies, type }) {
+    if (!movies?.length) return null;
+
     return (
-        <Swiper
-        modules={[Navigation, Pagination]}
-        spaceBetween={20}           // 카드 사이 간격
-        slidesPerView={4}           // 한 화면에 보일 카드 개수
-        navigation                  // 좌우 네비게이션 버튼
-        pagination={{ clickable: true }} // 페이지네이션 점 클릭 가능
-        loop={true}                 // 무한 루프 슬라이드
-        >
-        {data.results.map((movie) => (
-            <SwiperSlide key={movie.id}>
-                <MovieCard movie={movie} />
-            </SwiperSlide>
-        ))}
-        </Swiper>
+        <div className="mb-12 relative overflow-visible z-10">
+            <h2 className="text-xl font-bold text-accent mb-4">{title}</h2>
+            <Swiper
+                modules={[Autoplay]}
+                spaceBetween={16}
+                slidesPerView={5}
+                loop={true}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
+                breakpoints={{
+                1024: { slidesPerView: 5 },   // 데스크탑
+                768: { slidesPerView: 4 },    // 태블릿
+                480: { slidesPerView: 2 },  // 모바일
+                }}
+                className="overflow-visible"
+            >
+                {movies.map((movie) => (
+                    <SwiperSlide key={movie.id} className="overflow-visible z-10">
+                        <MovieCard movie={movie} type={type} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
     );
 }
