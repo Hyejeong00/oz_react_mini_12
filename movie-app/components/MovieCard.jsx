@@ -1,20 +1,20 @@
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, type = "default" }) {
     const navigate = useNavigate();
-    const baseUrl = "https://image.tmdb.org/t/p/w500" 
+    const baseUrl = "https://image.tmdb.org/t/p/w500";
 
     const handleClick = () => {
-        navigate(`/details`);
+        navigate(`/details/${type}/${movie.id}`);
     };
 
     return (
         <div
-            className="max-w-[1000px] cursor-pointer transition-transform duration-300 hover:scale-105 border border-accent p-2 rounded shadow bg-dark text-dark2 flex flex-col h-[320px]"
+            className="group relative transition-all duration-300 hover:shadow-xl hover:border-2 hover:border-gold hover:bg-dark/80 cursor-pointer p-2 rounded shadow bg-dark text-dark2 flex flex-col h-[320px]"
             onClick={handleClick}
         >
-            {/* 이미지 영역 (고정 높이 & 비율) */}
-            <div className="w-full max-w-[200px] h-[250px] mx-auto overflow-hidden">
+            {/* 이미지 영역 */}
+            <div className="w-[160px] h-[240px] mx-auto overflow-hidden">
                 <img
                     src={baseUrl + movie.poster_path}
                     alt={movie.title}
@@ -22,15 +22,22 @@ export default function MovieCard({ movie }) {
                 />
             </div>
 
-            {/* 텍스트 영역 (하단 정렬) */}
-            <div className="text-center">
-                <h2 className="mt-2 font-semibold text-sm text-accent line-clamp-1">
+            {/* 텍스트 영역 */}
+            <div className="text-center mt-2">
+                <h2 className="font-semibold text-sm text-accent group-hover:text-white transition-colors duration-300 line-clamp-1">
                     {movie.title}
                 </h2>
-                <p className="text-xs text-gold">
-                    ⭐ 평점: {movie.vote_average.toFixed(1)}
-                </p>
+
+                {type === "upComing" ? (
+                    <p className="text-xs group-hover:text-gray-300 transition-colors duration-300">
+                        개봉일: {movie.release_date}
+                    </p>
+                ) : (
+                    <p className="text-xs text-gold">
+                        ⭐ 평점: {movie.vote_average?.toFixed(1) ?? "N/A"}
+                    </p>
+                )}
             </div>
         </div>
-    )
+    );
 }

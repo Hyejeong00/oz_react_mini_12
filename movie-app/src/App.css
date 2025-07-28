@@ -1,0 +1,7 @@
+.custom-bullet {
+  @apply w-5 h-5 bg-gray-600 rounded-sm cursor-pointer opacity-60 transition-opacity duration-300;
+}
+
+.custom-bullet-active {
+  @apply bg-white opacity-100;
+}
