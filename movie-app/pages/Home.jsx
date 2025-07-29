@@ -2,7 +2,6 @@ import { useSelector } from "react-redux"
 import MovieSlider from '../components/MovieSlider'
 import BannerSlider from '../components/BannerSlider'
 import BannerSkeleton from "../components/skeleton/BannerSkeleton"
-import MovieCardSkeleton from '../components/skeleton/MovieCardSkeleton'
 import MovieSliderSkeleton from "../components/skeleton/MovieSliderSkeleton"
 
 function Home() {
@@ -12,7 +11,7 @@ function Home() {
     const topRated = useSelector(state => state.movie.topRated);
 
     return (
-        <div className="min-h-screen bg-darkest text-white px-4 py-6 space-y-12">
+        <div className="min-h-screen bg-white dark:bg-darker text-black dark:bg-darkest dark:text-white px-4 py-6 space-y-12">
             {popular.loading ? <BannerSkeleton /> : <BannerSlider />}
 
             {popular.loading

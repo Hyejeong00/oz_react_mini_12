@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { fetchNowPlayingMovies, fetchPopularMovies, fetchTopRatedMovies, fetchUpComingMovies } from './RTK/movieThunks'
 import { useEffect } from 'react'
 import { fetchGenres } from './RTK/genreThunk'
+import SearchMovie from '../pages/SearchMovie'
 
 function App() {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Layout />} >
           <Route index element={<Home />} />
           <Route path="/details/:type/:movieId" element={<MovieDetail />} />
+          <Route path='/search/' element={<SearchMovie />} />
         </Route>
       </Routes>
     </>
