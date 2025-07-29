@@ -6,7 +6,7 @@ export default function MovieSlider({ title, movies, type }) {
     if (!movies?.length) return null;
 
     return (
-        <div className="mb-12 relative overflow-visible z-10">
+        <div className="mb-10 relative overflow-visible z-5 ">
             <h2 className="text-xl font-bold text-accent mb-4">{title}</h2>
             <Swiper
                 modules={[Autoplay]}
@@ -22,10 +22,10 @@ export default function MovieSlider({ title, movies, type }) {
                 768: { slidesPerView: 4 },    // 태블릿
                 480: { slidesPerView: 2 },  // 모바일
                 }}
-                className="overflow-visible"
+                className='overflow-visible z-6'
             >
                 {movies.map((movie) => (
-                    <SwiperSlide key={movie.id} className="overflow-visible z-10">
+                    <SwiperSlide key={movie.id} className='overflow-visible z-7'>
                         <MovieCard movie={movie} type={type} />
                     </SwiperSlide>
                 ))}

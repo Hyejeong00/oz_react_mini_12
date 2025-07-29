@@ -18,7 +18,7 @@ export const fetchMovies = async (endpoint, token) => {
         }
 
         const data = await response.json();
-        const nonAdult = data.results.filter(movie => !movie.adult);
+        const nonAdult = data.results.filter(movie => !movie.adult); // 성인영화가 아닌 영화만
         results.push(...nonAdult);
         page++;
 

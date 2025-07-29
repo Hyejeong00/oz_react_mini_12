@@ -5,18 +5,22 @@ const initialState = {
     popular: {
         data: [],
         loading: false,
+        error: null,
     },
     nowPlaying: {
         data: [],
         loading: false,
+        error: null,
     },
     upComing: {
         data: [],
         loading: false,
+        error: null,
     },
     topRated: {
         data: [],
         loading: false,
+        error: null,
     }
 };
 
@@ -35,6 +39,7 @@ export const movieSlice = createSlice({
             })
             .addCase(fetchPopularMovies.rejected, (state) => {
                 state.popular.loading = false
+                state.error = action.error.message;
             })
             // 현재 상영중인 영화
             .addCase(fetchNowPlayingMovies.pending, (state) => {
@@ -46,6 +51,7 @@ export const movieSlice = createSlice({
             })
             .addCase(fetchNowPlayingMovies.rejected, (state) => {
                 state.nowPlaying.loading = false
+                state.error = action.error.message;
             })
             // 상영 예정 영화
             .addCase(fetchUpComingMovies.pending, (state) => {
@@ -57,6 +63,7 @@ export const movieSlice = createSlice({
             })
             .addCase(fetchUpComingMovies.rejected, (state) => {
                 state.upComing.loading = false
+                state.error = action.error.message;
             })
             // 최고 평점 영화
             .addCase(fetchTopRatedMovies.pending, (state) => {
@@ -68,6 +75,7 @@ export const movieSlice = createSlice({
             })
             .addCase(fetchTopRatedMovies.rejected, (state) => {
                 state.topRated.loading = false
+                state.error = action.error.message;
             })
     }
 })
