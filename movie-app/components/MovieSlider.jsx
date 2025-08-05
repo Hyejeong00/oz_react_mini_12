@@ -10,18 +10,18 @@ export default function MovieSlider({ title, movies, type }) {
             <h2 className="text-xl font-bold text-accent mb-4">{title}</h2>
             <Swiper
                 modules={[Autoplay]}
-                spaceBetween={16}
-                slidesPerView={5}
+                slidesPerView={2}
                 loop={true}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
                 }}
                 breakpoints={{
-                1024: { slidesPerView: 5 },   // 데스크탑
-                768: { slidesPerView: 4 },    // 태블릿
-                480: { slidesPerView: 2 },  // 모바일
+                    480: { slidesPerView: 2 },
+                    768: { slidesPerView: 4 },
+                    1024: { slidesPerView: 5 },
                 }}
+
                 className='overflow-visible z-6'
             >
                 {movies.map((movie) => (

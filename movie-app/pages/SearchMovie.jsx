@@ -14,7 +14,7 @@ export default function SearchMovie() {
     return (
         <div className="p-4 max-w-7xl mx-auto text-black dark:text-white">
             <h2 className="text-lg font-semibold mb-4">
-                <span className="text-accent">{`"${query}"`}</span> 에 대한 검색 결과
+                <span className="text-accent">{"${query}"}</span> 에 대한 검색 결과
                 <span className="text-gold"> ({data.length}개)</span>
             </h2>
 

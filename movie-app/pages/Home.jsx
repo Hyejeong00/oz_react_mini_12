@@ -11,7 +11,7 @@ function Home() {
     const topRated = useSelector(state => state.movie.topRated);
 
     return (
-        <div className="min-h-screen bg-white dark:bg-darker text-black dark:bg-darkest dark:text-white px-4 py-6 space-y-12">
+        <div className="min-h-screen bg-white dark:bg-[#0F0F0F] text-black dark:text-white px-4 py-6 space-y-12">
             {popular.loading ? <BannerSkeleton /> : <BannerSlider />}
 
             {popular.loading

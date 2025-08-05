@@ -5,7 +5,7 @@ export default function useDebounce(input, delay) {
 
     useEffect(() => {
         const handler = setTimeout(() => {
-        setDebounced(input);
+            setDebounced(input);
         }, delay);
 
         return () => {

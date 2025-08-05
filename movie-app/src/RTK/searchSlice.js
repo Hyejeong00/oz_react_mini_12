@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchSearchMovies } from "./searchThunk";
 
+const initialState = {
+    data: [],
+    loading: false,
+    error: null
+};
+
 export const searchSlice = createSlice({
     name: 'search',
-    initialState: {
-        data: [],
-        loading: false,
-        error: null,
-    },
+    initialState,
     reducers: {
-        clearResults: (state) => {
-        state.data = [];
-        },
+        clearResults: () => initialState // ✅ 상태 초기화
     },
     extraReducers: (builder) => {
         builder
@@ -25,6 +25,8 @@ export const searchSlice = createSlice({
         .addCase(fetchSearchMovies.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
-        });
+        })
     },
 });
+
+export const { clearResults } = searchSlice.actions;
