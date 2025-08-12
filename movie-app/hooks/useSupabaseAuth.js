@@ -40,13 +40,16 @@ export const useSupabaseAuth = () => {
                 password: password
             });
 
-            if(error){
+            if(!error){
+                console.log("로그인 성공:", data)
+                return { success: true, data};
+            }else{
                 console.error("로그인 에러:", error)
+                return { success: false, data};
             }
-            console.log("로그인 성공:", data)
-            return { success: true, data};
         }catch(error){
             console.error("에러:", error)
+            return { success: false, data};
         }
     };
 

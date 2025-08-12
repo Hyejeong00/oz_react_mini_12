@@ -5,9 +5,10 @@ import MovieOverview from "./MovieOverview";
 import MovieTabs from "./MovieTabs";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovieDetail } from "../../src/RTK/detailThunk";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function MovieDetail() {
+    const [activeTab, setActiveTab] = useState("trailer");
     const dispatch = useDispatch()
     const { movieId } = useParams();
     const { movie, loading, error } = useSelector((state) => state.detail);
@@ -21,8 +22,8 @@ export default function MovieDetail() {
     if (error) return <div>에러: {error}</div>;
 
     return (
-        <div className="w-full p-4 sm:p-6 shadow-2xl bg-white text-black dark:bg-[#0F0F0F] dark:text-white">
-            <MovieOverview movie={movie} />
+        <div className="w-full p-4 sm:p-6  bg-white text-black dark:bg-[#0F0F0F] dark:text-white">
+            <MovieOverview setActiveTab={setActiveTab}/>
             <div className="mt-6 space-y-3">
                 <div className="flex flex-wrap items-center gap-4">
                     <p className="text-lg font-semibold text-yellow-700 dark:text-gold flex items-center gap-1">
@@ -46,7 +47,7 @@ export default function MovieDetail() {
                     </div>
                 </div>
             </div>
-            <MovieTabs movie={movie} />
+            <MovieTabs activeTab={activeTab} setActiveTab={setActiveTab}/>
         </div>
     );
 }

@@ -16,9 +16,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { login } = useSupabaseAuth();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,7 +25,6 @@ export default function LoginPage() {
       email: validateEmail(form.email),
       password: validatePassword(form.password),
     };
-
     setErrors(newErrors);
 
     for (const [key, value] of Object.entries(newErrors)) {
@@ -47,30 +44,34 @@ export default function LoginPage() {
         const user = await getUserInfo();
         dispatch(setUser(user));
         navigate('/');
+      } else {
+        setErrors({ ...errors, loginError: "이메일이나 비밀번호가 맞지 않습니다." });
       }
     } catch (err) {
-      console.error(err);
+      console.error("로그인 오류:", err);
     }
   };
 
   const handleOAuthLogin = async (provider) => {
     try {
-      await supabase.auth.signInWithOAuth({
-        provider
-      });
+      await supabase.auth.signInWithOAuth({ provider });
     } catch (err) {
       console.error('OAuth 로그인 오류:', err);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black text-white px-4">
+    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-4">
       <HomeButton />
       <form
         onSubmit={handleLogin}
-        className="w-full max-w-md p-8 bg-[#121c2a] rounded-xl shadow-2xl border border-[#2c3e50]"
+        className="w-full max-w-md p-8 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-600"
       >
-        <h2 className="text-3xl font-extrabold text-center mb-8 text-gold">로그인</h2>
+        <h2 className="text-3xl font-extrabold text-center mb-8 text-gray-900 dark:text-white ">로그인</h2>
+
+        {errors.loginError && (
+          <p className="text-red-500 text-sm mb-4 text-center">{errors.loginError}</p>
+        )}
 
         <InputField
           label="이메일"
@@ -91,18 +92,18 @@ export default function LoginPage() {
 
         <button
           type="submit"
-          className="w-full mt-6 py-3 bg-[#00A86B] hover:bg-[#029761] text-white font-semibold text-lg rounded-md shadow-md transition"
+          className="w-full mt-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold text-lg rounded-md shadow-md transition"
         >
           로그인
         </button>
 
-        <div className="my-6 text-center text-gray-400">또는</div>
+        <div className="my-6 text-center text-gray-500 dark:text-gray-400">또는</div>
 
         <div className="flex flex-col gap-3">
           <button
             type="button"
             onClick={() => handleOAuthLogin('google')}
-            className="flex items-center justify-center gap-3 w-full py-3 px-4 bg-white text-black font-semibold rounded-md shadow hover:bg-gray-100 transition"
+            className="flex items-center justify-center gap-3 w-full py-3 px-4 bg-white dark:bg-gray-100 text-black font-semibold rounded-md shadow hover:bg-gray-100 transition"
           >
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
@@ -126,9 +127,9 @@ export default function LoginPage() {
           </button>
         </div>
 
-        <p className="text-center text-sm mt-6 text-gray-400">
+        <p className="text-center text-sm mt-6 text-gray-600 dark:text-gray-400">
           계정이 없으신가요?{' '}
-          <Link to="/signup" className="text-gold hover:underline font-semibold">
+          <Link to="/signup" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">
             회원가입
           </Link>
         </p>

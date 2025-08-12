@@ -12,14 +12,13 @@ export default function InputField  ({ label, type, name, value, onChange, error
         name={name}
         value={value}
         onChange={onChange}
-        className={`w-full px-4 py-2 rounded-md border text-sm transition 
+        className={`w-full px-4 py-2 rounded-md border text-sm transition bg-white text-black placeholder-gray-400 dark:placeholder-gray-500
+            focus:outline-none focus:ring-1
             ${
             error
                 ? 'border-red-500 focus:ring-red-500'
                 : 'border-gray-300 focus:ring-accent focus:border-accent dark:border-gray-600 dark:focus:border-gold'
             }
-            bg-white dark:bg-darker text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500
-            focus:outline-none focus:ring-1
         `}
         />
         {/* input 밑에 띄울 유효성 검사 에러 메시지 */}
