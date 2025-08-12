@@ -44,7 +44,7 @@ export default function BannerSlider() {
                     />
 
                     {/* 오버레이 텍스트 */}
-                    <div className="absolute top-0 left-0 w-full h-full pointer-events-none bg-gradient-to-r from-black/80 via-black/50 to-black/0 p-8 flex flex-col justify-end text-white z-10">
+                    <div className="absolute top-0 left-0 w-full h-full pointer-events-none bg-gradient-to-r from-[#0F0F0F]/100 via-[#0F0F0F]/40 to-[#0F0F0F]/0 p-8 flex flex-col justify-end text-white z-10">
                         <div
                         className={`w-2/3 space-y-4 text-base md:text-lg drop-shadow-md transition-all duration-1000 ease-out transform
                             ${activeIndex === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'}

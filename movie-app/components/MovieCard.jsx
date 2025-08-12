@@ -11,7 +11,7 @@ export default function MovieCard({ movie, type = "default" }) {
     return (
         <div
         onClick={handleClick}
-        className="group relative transition-shadow duration-300 ease-in-out cursor-pointer p-2 rounded-lg shadow-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1f2937] flex flex-col hover:shadow-xl w-full max-w-[200px] mx-auto"
+        className="group relative transition-shadow duration-300 ease-in-out cursor-pointer p-2 rounded-lg shadow-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-[#1A1A1A] flex flex-col hover:shadow-xl w-full max-w-[200px] mx-auto"
         >
 
         {/* 이미지 영역 */}

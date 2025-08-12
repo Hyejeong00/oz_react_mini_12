@@ -4,8 +4,7 @@ import RecommendTab from "./RecommendTab";
 import DetailTab from "./DetailTab";
 import { useSelector } from "react-redux";
 
-export default function MovieTabs() {
-    const [activeTab, setActiveTab] = useState("trailer");
+export default function MovieTabs({activeTab, setActiveTab}) {
     const { movie } = useSelector((state) => state.detail);
 
     return (
